@@ -20,6 +20,7 @@ export default function Home() {
                 'message.action.subscribed': '通知が有効になりました！',
                 'message.action.resubscribed': '通知が再び有効になりました！',
                 'message.action.unsubscribed': '通知が無効になりました',
+                'message.action.subscribing': '通知を有効にしています...',
                 'dialog.main.title': '通知を管理',
                 'dialog.main.button.subscribe': '通知を有効にする',
                 'dialog.main.button.unsubscribe': '通知を無効にする',

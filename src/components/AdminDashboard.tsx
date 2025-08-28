@@ -12,13 +12,22 @@ export const AdminDashboard: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [surveys, setSurveys] = useState<Survey[]>([]);
   const [registrationCodes, setRegistrationCodes] = useState<ClientRegistrationCode[]>([]);
-  const [pointExchangeRequests, setPointExchangeRequests] = useState<any[]>([]);
+  const [pointExchangeRequests, setPointExchangeRequests] = useState<Record<string, unknown>[]>([]);
   const [advertisements, setAdvertisements] = useState<Advertisement[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTab, setSelectedTab] = useState<'users' | 'surveys' | 'codes' | 'exchanges' | 'ads' | 'analytics'>('users');
   const [showCreateCodeModal, setShowCreateCodeModal] = useState(false);
   const [showCreateAdModal, setShowCreateAdModal] = useState(false);
   const [exchangeStatusFilter, setExchangeStatusFilter] = useState<'all' | 'pending' | 'completed' | 'rejected'>('all');
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState<string | null>(null);
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    image_url: '',
+    link_url: '',
+    display_order: 0
+  });
 
   useEffect(() => {
     fetchData();

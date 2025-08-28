@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Next.js環境変数を使用（フォールバックとしてVite環境変数も対応）
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || (typeof window !== 'undefined' && (window as Record<string, unknown>).process?.env?.VITE_SUPABASE_URL as string);
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || (typeof window !== 'undefined' && (window as Record<string, unknown>).process?.env?.VITE_SUPABASE_ANON_KEY as string);
+// Next.js環境変数を使用
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
 // デバッグ用のログ
 console.log('Supabase Configuration:');
@@ -17,7 +17,7 @@ export const isSupabaseConfigured = !!(supabaseUrl && supabaseKey &&
   supabaseUrl.includes('.supabase.co'));
 
 // Supabaseが正しく設定されている場合のみクライアントを作成
-export const supabase = isSupabaseConfigured ? createClient(supabaseUrl, supabaseKey, {
+export const supabase = isSupabaseConfigured && supabaseUrl && supabaseKey ? createClient(supabaseUrl, supabaseKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
