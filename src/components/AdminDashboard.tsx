@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import { supabase } from '../config/supabase';
 import { User, Survey, ClientRegistrationCode } from '../types';
 import { Advertisement } from '../types';
-import { Shield, Users, FileText, AlertTriangle, TrendingUp, Calendar, Mail, Building, Plus, Key, Trash2, X, CreditCard, Clock, Upload } from 'lucide-react';
+import { Shield, Users, FileText, TrendingUp, Calendar, Mail, Building, Plus, Key, Trash2, X, CreditCard, Clock, Upload } from 'lucide-react';
 import { SparklesCore } from './ui/sparkles';
 import { motion } from 'framer-motion';
 

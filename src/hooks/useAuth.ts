@@ -680,7 +680,7 @@ export const useAuth = () => {
             
             console.log('Support account created, now signing in...');
             // 作成後に再度サインイン
-            const { data: retryData, error: retryError } = await supabase.auth.signInWithPassword({
+            const { error: retryError } = await supabase.auth.signInWithPassword({
               email,
               password,
             });
@@ -731,7 +731,7 @@ export const useAuth = () => {
     }
   };
 
-  const signUp = async (email: string, password: string, userData: any) => {
+  const signUp = async (email: string, password: string, userData: Record<string, unknown>) => {
     console.log('=== SIGNUP FUNCTION CALLED ===');
     console.log('Email:', email);
     console.log('Password length:', password.length);

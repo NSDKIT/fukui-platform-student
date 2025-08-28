@@ -1,0 +1,55 @@
+Next.js Dashboard Project Structure
+=====================================
+
+nextjs-dashboard/
+├── app/
+│   ├── layout.tsx          # Next.js レイアウトファイル
+│   └── page.tsx            # メインページ（旧App.tsx）
+├── src/
+│   ├── components/         # Reactコンポーネント
+│   │   ├── AuthForm.tsx
+│   │   ├── WelcomeScreen.tsx
+│   │   ├── MonitorDashboard.tsx
+│   │   ├── ClientDashboard.tsx
+│   │   ├── AdminDashboard.tsx
+│   │   ├── SupportDashboard.tsx
+│   │   └── ui/
+│   │       └── sparkles.tsx
+│   ├── hooks/
+│   │   └── useAuth.ts      # 認証フック
+│   ├── config/
+│   │   └── supabase.ts     # Supabase設定
+│   ├── lib/
+│   ├── types/
+│   ├── utils/
+│   └── index.css           # グローバルCSS
+├── public/                 # 静的ファイル
+│   ├── background-image.png
+│   ├── oomori.webp
+│   ├── ozaki.webp
+│   ├── zenryoku.png
+│   └── x1.png - x14.png    # 画像ファイル群
+├── supabase/               # Supabase設定
+├── package.json            # 依存関係とスクリプト
+├── next.config.js          # Next.js設定
+├── tsconfig.json           # TypeScript設定
+├── tailwind.config.js      # Tailwind CSS設定
+├── postcss.config.js       # PostCSS設定
+├── .env.local              # 環境変数
+├── .env.example            # 環境変数テンプレート
+├── eslint.config.js        # ESLint設定
+└── README.md               # プロジェクトドキュメント
+
+主な変更点:
+- Vite設定 → Next.js設定
+- src/App.tsx → app/page.tsx
+- src/main.tsx → app/layout.tsx
+- VITE_* → NEXT_PUBLIC_* 環境変数
+- ES Module → CommonJS (設定ファイル)
+
+開発コマンド:
+npm install    # 依存関係インストール
+npm run dev    # 開発サーバー起動
+npm run build  # プロダクションビルド
+npm start      # プロダクションサーバー起動
+

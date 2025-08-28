@@ -257,11 +257,11 @@ export const parseSurveyMarkdown = (markdown: string): ParsedSurvey => {
   };
 };
 
-export const convertParsedSurveyToQuestions = (parsedSurvey: ParsedSurvey): any[] => {
-  const questions: any[] = [];
+export const convertParsedSurveyToQuestions = (parsedSurvey: ParsedSurvey): Record<string, unknown>[] => {
+  const questions: Record<string, unknown>[] = [];
   let orderIndex = 0;
   
-  parsedSurvey.sections.forEach((section, sectionIndex) => {
+  parsedSurvey.sections.forEach((section) => {
     // セクションヘッダーは質問として追加しない
     // セクション情報は各質問のメタデータとして保持
     
