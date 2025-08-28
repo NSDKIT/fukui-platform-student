@@ -17,7 +17,6 @@ import {
   X,
   CreditCard,
   User,
-  Settings,
   ChevronLeft,
   ChevronRight,
   MessageCircle,
@@ -65,7 +64,7 @@ const MonitorDashboard: React.FC = () => {
     if (user?.id) {
       fetchData();
     }
-  }, [user?.id]); // Only depend on user ID, not the entire user object
+  }, [user?.id, fetchData]); // Include fetchData in dependencies
 
   const fetchData = async () => {
     if (!user?.id) {
@@ -175,7 +174,7 @@ const MonitorDashboard: React.FC = () => {
     setSelectedSurvey(survey);
   };
 
-  const handleSubmitResponse = async (surveyId: string, answers: any[]) => {
+  const handleSubmitResponse = async (surveyId: string, answers: Record<string, unknown>[]) => {
     try {
       console.log('Submitting response:', { surveyId, answers, monitorId: user?.id });
       
@@ -207,28 +206,9 @@ const MonitorDashboard: React.FC = () => {
     }
   };
 
-  const getAnswerDisplay = (answer: any, question: Question) => {
-    if (answer.answer_text) return answer.answer_text;
-    if (answer.answer_option) {
-      let displayText = answer.answer_option;
-      if (answer.other_text) {
-        displayText += ` (${answer.other_text})`;
-      }
-      return displayText;
-    }
-    if (answer.answer_options && Array.isArray(answer.answer_options)) {
-      let displayText = answer.answer_options.join(', ');
-      if (answer.other_text) {
-        displayText += ` (その他: ${answer.other_text})`;
-      }
-      return displayText;
-    }
-    if (answer.answer_rating) return `${answer.answer_rating}/5`;
-    if (answer.answer_boolean !== undefined) return answer.answer_boolean ? 'はい' : 'いいえ';
-    return '未回答';
-  };
 
-  const userProfile = user?.profile as any;
+
+  const userProfile = user?.profile as Record<string, unknown>;
   const totalPoints = userProfile?.points || 0;
 
   if (loading) {
@@ -627,16 +607,16 @@ const MonitorDashboard: React.FC = () => {
 function SurveyModal({ survey, onClose, onSubmit }: {
   survey: Survey;
   onClose: () => void;
-  onSubmit: (surveyId: string, answers: any[]) => void;
+  onSubmit: (surveyId: string, answers: Record<string, unknown>[]) => void;
 }) {
-  const [answers, setAnswers] = useState<any[]>([]);
+  const [answers, setAnswers] = useState<Record<string, unknown>[]>([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [otherTexts, setOtherTexts] = useState<{ [key: number]: string }>({});
 
   const currentQuestion = survey.questions[currentQuestionIndex];
   const isLastQuestion = currentQuestionIndex === survey.questions.length - 1;
 
-  const handleAnswer = (answer: any) => {
+  const handleAnswer = (answer: Record<string, unknown>) => {
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = {
       question_id: currentQuestion.id,
@@ -975,31 +955,7 @@ const PointExchangeModal: React.FC<{
 
       if (dbError) throw dbError;
 
-      // メール送信用のデータを準備
-      const emailData = {
-        to: 'koecan.koushiki@gmail.com',
-        from: userEmail,
-        subject: `【声キャン！】ポイント交換依頼 - ${selectedOption?.name}`,
-        body: `
-ポイント交換依頼が届きました。
 
-■ 依頼者情報
-メールアドレス: ${userEmail}
-
-■ 交換内容
-交換先: ${selectedOption?.name}
-交換ポイント数: ${pointsAmount}ポイント
-交換金額: ${pointsAmount}円相当
-
-■ 連絡先情報
-${contactInfo}
-
-■ 備考
-${notes || 'なし'}
-
-処理をお願いいたします。
-        `
-      };
 
       setSuccess(true);
     } catch (error) {

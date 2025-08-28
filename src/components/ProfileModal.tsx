@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, Save, User, School, Briefcase, MapPin, Heart, TrendingUp } from 'lucide-react';
+import { X, Save, User, Briefcase, Heart, TrendingUp } from 'lucide-react';
 import { supabase } from '../config/supabase';
 import { User as UserType } from '../types';
 import { motion } from 'framer-motion';
@@ -11,7 +11,6 @@ interface ProfileModalProps {
 }
 
 export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, user, onProfileUpdate }) => {
-  const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState<'basic' | 'career' | 'preferences'>('basic');
   const [formData, setFormData] = useState({
@@ -68,7 +67,7 @@ export const ProfileModal: React.FC<ProfileModalProps> = ({ onClose, user, onPro
 
   useEffect(() => {
     if (user?.profile) {
-      const profile = user.profile as any;
+      const profile = user.profile as Record<string, unknown>;
       setFormData({
         gender_detail: profile.gender_detail || '',
         grade: profile.grade || '',

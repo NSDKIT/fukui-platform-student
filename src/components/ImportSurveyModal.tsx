@@ -4,7 +4,7 @@ import { parseSurveyMarkdown, convertParsedSurveyToQuestions } from '../utils/su
 
 interface ImportSurveyModalProps {
   onClose: () => void;
-  onImport: (data: any) => void;
+  onImport: (data: Record<string, unknown>) => void;
 }
 
 export const ImportSurveyModal: React.FC<ImportSurveyModalProps> = ({ onClose, onImport }) => {
@@ -12,7 +12,7 @@ export const ImportSurveyModal: React.FC<ImportSurveyModalProps> = ({ onClose, o
   const [fileContent, setFileContent] = useState('');
   const [fileName, setFileName] = useState('');
   const [error, setError] = useState<string | null>(null);
-  const [preview, setPreview] = useState<any>(null);
+  const [preview, setPreview] = useState<Record<string, unknown> | null>(null);
 
   const handleDrag = (e: React.DragEvent) => {
     e.preventDefault();
@@ -65,7 +65,7 @@ export const ImportSurveyModal: React.FC<ImportSurveyModalProps> = ({ onClose, o
           sectionsCount: parsed.sections.length,
           questionsCount: questions.filter(q => q.question_type !== 'section_header').length
         });
-      } catch (err) {
+      } catch {
         setError('ファイルの解析に失敗しました。形式を確認してください。');
         setPreview(null);
       }
@@ -88,7 +88,7 @@ export const ImportSurveyModal: React.FC<ImportSurveyModalProps> = ({ onClose, o
         sectionsCount: parsed.sections.length,
         questionsCount: questions.filter(q => q.question_type !== 'section_header').length
       });
-    } catch (err) {
+    } catch {
       setError('テキストの解析に失敗しました。形式を確認してください。');
       setPreview(null);
     }

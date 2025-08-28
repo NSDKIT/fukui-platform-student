@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import { supabase } from '../config/supabase';
 import { Survey, Question } from '../types';
 import { Plus, BarChart3, FileText, Download, Eye, Edit, Trash2, Users, Calendar, Upload, X, Star, MessageCircle } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
+
 import { ImportSurveyModal } from './ImportSurveyModal';
 import { ChatModal } from './ChatModal';
 import { SparklesCore } from './ui/sparkles';
@@ -12,7 +12,7 @@ import { motion } from 'framer-motion';
 // CreateSurveyModalをClientDashboardの前に定義
 interface CreateSurveyModalProps {
   onClose: () => void;
-  onSubmit: (data: any) => void;
+  onSubmit: (data: Record<string, unknown>) => void;
   surveyToEdit?: Survey | null;
 }
 
@@ -27,7 +27,7 @@ const CreateSurveyModal: React.FC<CreateSurveyModalProps> = ({ onClose, onSubmit
       {
         question_text: '',
         question_type: 'text',
-        options: [],
+        options: [] as string[],
         required: false,
         is_multiple_select: false
       }

@@ -115,7 +115,6 @@ export const ChatModal: React.FC<ChatModalProps> = ({ onClose, user, initialRoom
         if (consultationMessage) {
           const nameMatch = consultationMessage.message.match(/お名前:\s*([^\n\r]+)/);
           if (nameMatch && nameMatch[1]) {
-            const applicantName = nameMatch[1].trim();
             updateRoomName(roomId, `シーエイト`);
           }
         }
