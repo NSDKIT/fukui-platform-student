@@ -82,49 +82,7 @@ export const ChatModal: React.FC<ChatModalProps> = ({ onClose, user, initialRoom
     }
   };
 
-  const createSupportChat = async () => {
-    if (!user) return;
 
-    try {
-      // サポートスタッフのユーザーIDを取得
-      const { data: supportUser, error: supportError } = await supabase
-        .from('users')
-        .select('id, name')
-        .eq('email', 'support@example.com')
-        .single();
-
-      if (supportError) {
-        console.error('Error fetching support user:', supportError);
-        return;
-      }
-
-      if (!supportUser) {
-        console.error('Support user not found');
-        return;
-      }
-
-      // 新しいサポートチャットを作成
-      const { data: newRoom, error: createError } = await supabase
-        .from('chat_rooms')
-        .insert([{
-          room_type: 'support',
-          participants: [user.id, supportUser.id],
-          created_by: user.id,
-          name: `シーエイト`
-        }])
-        .select()
-        .single();
-
-      if (createError) throw createError;
-
-      console.log('New support chat created:', newRoom);
-      setRooms([newRoom]);
-      setActiveRoom(newRoom);
-      fetchMessages(newRoom.id);
-    } catch (error) {
-      console.error('Error creating support chat:', error);
-    }
-  };
 
 
 

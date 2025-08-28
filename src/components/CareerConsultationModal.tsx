@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { X, MessageCircle, User, Clock, CheckCircle, Calendar, BookOpen, Edit3, Users } from 'lucide-react';
+import { X, MessageCircle, User, Clock, Calendar, BookOpen, Edit3, Users } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { supabase } from '../config/supabase';
 import { ChatModal } from './ChatModal';
 
 interface CareerConsultationModalProps {
   onClose: () => void;
-  user: any;
+  user: Record<string, unknown>;
   onChatOpen?: (roomId?: string) => void;
   initialServiceId?: string | null;
 }
@@ -22,7 +22,7 @@ export const CareerConsultationModal: React.FC<CareerConsultationModalProps> = (
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [showChatModal, setShowChatModal] = useState(false);
-  const [createdRoomId, setCreatedRoomId] = useState<string | null>(null);
+
 
   const consultationTypes = [
     {

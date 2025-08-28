@@ -255,20 +255,13 @@ export const AuthForm: React.FC<AuthFormProps> = ({ onBack }) => {
         setError(error.message || 'アカウント作成に失敗しました。');
         setLoading(false);
       }
-    } catch (err) {
+    } catch {
       setError('予期しないエラーが発生しました。');
       setLoading(false);
     }
   };
 
-  const handleRoleChange = (role: 'monitor' | 'client') => {
-    setSelectedRole(role);
-    setPrivacyConsent(false);
-    setCodeVerified(false);
-    setVerifiedCompanyInfo(null);
-    monitorForm.reset({ role: 'monitor' });
-    clientForm.reset({ role: 'client' });
-  };
+
 
   return (
     <div className="min-h-screen relative w-full bg-white flex items-center justify-center overflow-hidden">
