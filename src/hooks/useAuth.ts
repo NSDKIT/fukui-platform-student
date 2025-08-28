@@ -110,7 +110,7 @@ export const useAuth = () => {
     };
 
     initializeAuth();
-  }, []);
+  }, [loadUserProfile]);
 
   const loadUserProfile = async (userId: string) => {
     // 同じユーザーのプロファイルを既に読み込み中/済みの場合はスキップ
@@ -322,15 +322,7 @@ export const useAuth = () => {
     }
   };
 
-  // Helper function to check if user is admin
-  const isAdminUser = async (userId: string): Promise<boolean> => {
-    try {
-      const { data: authUser } = await supabase.auth.getUser();
-      return authUser.user?.email === 'admin@example.com';
-    } catch {
-      return false;
-    }
-  };
+
 
   // Helper function to ensure admin profile exists
   const ensureAdminProfile = async (userId: string): Promise<User | null> => {
@@ -610,7 +602,7 @@ export const useAuth = () => {
           // 管理者アカウントが存在しない場合は作成を試行
           if (error.message.includes('Invalid login credentials')) {
             console.log('Admin account not found, attempting to create...');
-            const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+            const { error: signUpError } = await supabase.auth.signUp({
               email,
               password,
               options: {
@@ -630,7 +622,7 @@ export const useAuth = () => {
             
             console.log('Admin account created, now signing in...');
             // 作成後に再度サインイン
-            const { data: retryData, error: retryError } = await supabase.auth.signInWithPassword({
+            const { error: retryError } = await supabase.auth.signInWithPassword({
               email,
               password,
             });
@@ -668,7 +660,7 @@ export const useAuth = () => {
           // サポートアカウントが存在しない場合は作成を試行
           if (error.message.includes('Invalid login credentials')) {
             console.log('Support account not found, attempting to create...');
-            const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+            const { error: signUpError } = await supabase.auth.signUp({
               email,
               password,
               options: {

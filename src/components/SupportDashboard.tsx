@@ -6,9 +6,6 @@ import {
   MessageCircle, 
   Users, 
   LogOut, 
-  Settings, 
-  Bell,
-  Search,
   Send,
   Phone,
   Mail,
@@ -35,13 +32,13 @@ const SupportDashboard: React.FC = () => {
       fetchOnlineUsers();
       fetchSupportStaff();
     }
-  }, [user]);
+  }, [user, fetchChatRooms, fetchOnlineUsers]);
 
   useEffect(() => {
     if (activeRoom) {
       setupRealtimeSubscription();
     }
-  }, [activeRoom]);
+  }, [activeRoom, setupRealtimeSubscription]);
 
     const fetchChatRooms = async () => {
     if (!user) return;
