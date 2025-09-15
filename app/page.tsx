@@ -1,5 +1,5 @@
 "use client"
-// import styles from './page.module.css'
+import styles from './page.module.css'
 import React, { useEffect } from 'react';
 import OneSignal from 'react-onesignal';
 
