@@ -10,7 +10,20 @@ export default function Home() {
         appId: '66b12ad6-dbe7-498f-9eb6-f9d8031fa8a1',
         notifyButton: {
           enable: true,
-          }
+          prenotify: true, // Added missing required property
+          showCredit: false, // Added missing required property
+          text: { // Added default text for the button
+            'tip.state.unsubscribed': '通知を有効にする',
+            'tip.state.subscribed': '通知が有効です',
+            'tip.state.blocked': '通知がブロックされています',
+            'message.action.subscribed': '通知を許可しました',
+            'message.action.resubscribed': '通知を再開しました',
+            'message.action.unsubscribed': '通知を無効にしました',
+            'dialog.main.title': '通知設定',
+            'dialog.main.button.subscribe': '有効にする',
+            'dialog.main.button.unsubscribe': '無効にする',
+          },
+        }
       });
     })()
   })
