@@ -8,9 +8,6 @@ export default function Home() {
     (async() => {
       await OneSignal.init({
         appId: '66b12ad6-dbe7-498f-9eb6-f9d8031fa8a1',
-        notifyButton: {
-            enable: true,
-        }
       });
     })()
   })
