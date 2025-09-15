@@ -8,9 +8,6 @@ export const initializeOneSignal = async () => {
   // Skip initialization if already initialized or no valid App ID
   if (isOneSignalInitialized || !ONESIGNAL_APP_ID || ONESIGNAL_APP_ID === 'your-onesignal-app-id') {
     console.log('OneSignal initialization skipped - already initialized or no valid App ID');
-    notifyButton: {
-      enable: true,
-      }
     return;
   }
 
@@ -21,6 +18,22 @@ export const initializeOneSignal = async () => {
       appId: ONESIGNAL_APP_ID,
       safari_web_id: process.env.NEXT_PUBLIC_ONESIGNAL_SAFARI_WEB_ID,
       allowLocalhostAsSecureOrigin: true,
+      notifyButton: { // Correctly placed inside the init object
+        enable: true,
+        prenotify: true, // Added missing required property
+        showCredit: false, // Added missing required property
+        text: { // Added default text for the button
+          'tip.state.unsubscribed': '通知を有効にする',
+          'tip.state.subscribed': '通知が有効です',
+          'tip.state.blocked': '通知がブロックされています',
+          'message.action.subscribed': '通知を許可しました',
+          'message.action.resubscribed': '通知を再開しました',
+          'message.action.unsubscribed': '通知を無効にしました',
+          'dialog.main.title': '通知設定',
+          'dialog.main.button.subscribe': '有効にする',
+          'dialog.main.button.unsubscribe': '無効にする',
+        },
+      },
     });
 
     isOneSignalInitialized = true;
