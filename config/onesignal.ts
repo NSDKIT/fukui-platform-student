@@ -17,9 +17,6 @@ export const initializeOneSignal = async () => {
     await OneSignal.init({
       appId: ONESIGNAL_APP_ID,
       safari_web_id: process.env.NEXT_PUBLIC_ONESIGNAL_SAFARI_WEB_ID,
-      notifyButton: {
-        enable: true,
-      },
       allowLocalhostAsSecureOrigin: true,
     });
 
