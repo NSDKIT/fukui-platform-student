@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Roboto_Mono } from "next/font/google"; // Changed Geist to Inter, Geist_Mono to Roboto_Mono
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({ // Changed geistSans to inter
+  variable: "--font-geist-sans", // Keeping variable name for CSS compatibility, but font is Inter
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const robotoMono = Roboto_Mono({ // Changed geistMono to robotoMono
+  variable: "--font-geist-mono", // Keeping variable name for CSS compatibility, but font is Roboto_Mono
   subsets: ["latin"],
 });
 
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${robotoMono.variable} antialiased`} // Updated to use inter and robotoMono variables
       >
         {children}
       </body>
