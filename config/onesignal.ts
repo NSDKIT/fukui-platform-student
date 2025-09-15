@@ -18,11 +18,11 @@ export const initializeOneSignal = async () => {
       appId: ONESIGNAL_APP_ID,
       safari_web_id: process.env.NEXT_PUBLIC_ONESIGNAL_SAFARI_WEB_ID,
       allowLocalhostAsSecureOrigin: true,
-      notifyButton: { // Correctly placed inside the init object
+      notifyButton: {
         enable: true,
-        prenotify: true, // Added missing required property
-        showCredit: false, // Added missing required property
-        text: { // Added default text for the button
+        prenotify: true,
+        showCredit: false,
+        text: {
           'tip.state.unsubscribed': '通知を有効にする',
           'tip.state.subscribed': '通知が有効です',
           'tip.state.blocked': '通知がブロックされています',
@@ -32,6 +32,11 @@ export const initializeOneSignal = async () => {
           'dialog.main.title': '通知設定',
           'dialog.main.button.subscribe': '有効にする',
           'dialog.main.button.unsubscribe': '無効にする',
+          // 以下、追加された必須プロパティ
+          'dialog.blocked.title': '通知がブロックされました',
+          'dialog.blocked.message': 'Webプッシュ通知を有効にするには、ブラウザの設定で通知を許可してください。',
+          'message.action.subscribing': '通知を購読中です...',
+          'message.prenotify': '新しいアンケート情報を受け取ります。',
         },
       },
     });
