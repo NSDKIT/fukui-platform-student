@@ -8,6 +8,9 @@ export const initializeOneSignal = async () => {
   // Skip initialization if already initialized or no valid App ID
   if (isOneSignalInitialized || !ONESIGNAL_APP_ID || ONESIGNAL_APP_ID === 'your-onesignal-app-id') {
     console.log('OneSignal initialization skipped - already initialized or no valid App ID');
+    notifyButton: {
+      enable: true,
+      }
     return;
   }
 
