@@ -10,7 +10,6 @@ export default function Home() {
         appId: '66b12ad6-dbe7-498f-9eb6-f9d8031fa8a1',
         notifyButton: {
           enable: true,
-          // 以下の3つのプロパティを追加します。
           prenotify: true,
           showCredit: false,
           text: {
@@ -23,6 +22,11 @@ export default function Home() {
             'dialog.main.title': '通知設定',
             'dialog.main.button.subscribe': '有効にする',
             'dialog.main.button.unsubscribe': '無効にする',
+            // 以下、追加された必須プロパティ
+            'dialog.blocked.title': '通知がブロックされました',
+            'dialog.blocked.message': 'Webプッシュ通知を有効にするには、ブラウザの設定で通知を許可してください。',
+            'message.action.subscribing': '通知を購読中です...',
+            'message.prenotify': '新しいアンケート情報を受け取ります。',
           },
         }
       });
